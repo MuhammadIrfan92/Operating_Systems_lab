@@ -1,0 +1,1 @@
+The shell currently runs commands that it reads directly from "commands.txt" file. 
