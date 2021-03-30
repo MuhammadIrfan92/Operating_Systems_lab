@@ -1,0 +1,6 @@
+echo Hello world
+ls
+pwd
+ps
+sleep 10s
+cat commands.txt
