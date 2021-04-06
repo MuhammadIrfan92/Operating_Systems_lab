@@ -40,7 +40,7 @@ char **tokenize(char *line)
 int main(){
 
 	FILE *fp;
-
+//	fp = fopen("commands.txt","r");
 	int choice;
 	pid_t q;
 	int exit;
@@ -49,7 +49,7 @@ int main(){
 	printf("\t\t\t\t\t\tWelcome to the shell\n");
 	while(exit != 3){
 		printf("\n1-Batch Mode\n");
-		printf("2-Type Command\n");
+		printf("2-Interactive Mode\n");
 		printf("3-Exit shell\n");
 
 		printf("Enter your choice\n");
@@ -74,7 +74,7 @@ int main(){
 				}
 			else{
 				wait(NULL);
-		
+		//		printf("In parent\n");
 				}
 			}
 		}
@@ -84,7 +84,6 @@ int main(){
 		char command[150];
 		char l[150];
 		char **tokens;
-		printf("\t\t\t\tYou have entered the Interactive Mode.\n");
 		printf("$");
 		scanf("%d",&none);
 		fgets(command,150,stdin);
