@@ -82,7 +82,8 @@ int main(){
 		char command[150];
 		char l[150];
 		char **tokens;
-		printf("Enter your command:");
+		printf("\t\t\t\t\t\t\tYou are in Interactive Mode\n");
+		printf("$");
 		scanf("%d",&none);
 		fgets(command,150,stdin);
 		printf("Your command is %s\n",command);
