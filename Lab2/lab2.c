@@ -49,7 +49,7 @@ int main(){
 	printf("\t\t\t\t\t\tWelcome to the shell\n");
 	while(exit != 3){
 		printf("\n1-Batch Mode\n");
-		printf("2-Type Command\n");
+		printf("2-Interactive Mode\n");
 		printf("3-Exit shell\n");
 
 		printf("Enter your choice\n");
