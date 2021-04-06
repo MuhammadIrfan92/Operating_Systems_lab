@@ -40,7 +40,7 @@ char **tokenize(char *line)
 int main(){
 
 	FILE *fp;
-	fp = fopen("commands.txt","r");
+
 	int choice;
 	pid_t q;
 	int exit;
@@ -49,12 +49,13 @@ int main(){
 	printf("\t\t\t\t\t\tWelcome to the shell\n");
 	while(exit != 3){
 		printf("\n1-Batch Mode\n");
-		printf("2-Interactive Mode\n");
+		printf("2-Type Command\n");
 		printf("3-Exit shell\n");
 
 		printf("Enter your choice\n");
 		scanf("%d",&choice);
 	if(choice == 1){ 	//	Batch Mode
+	fp = fopen("commands.txt","r");
 	printf("\n");
 	while(!feof(fp)){
 		char l[150] = "";
@@ -73,22 +74,26 @@ int main(){
 				}
 			else{
 				wait(NULL);
-		//		printf("In parent\n");
+		
 				}
 			}
 		}
+	fclose(fp);
 	}
 	if(choice == 2){	//	Interactive Mode
 		char command[150];
 		char l[150];
 		char **tokens;
-		printf("\t\t\t\t\t\t\tYou are in Interactive Mode\n");
+		printf("\t\t\t\tYou have entered the Interactive Mode.\n");
 		printf("$");
 		scanf("%d",&none);
 		fgets(command,150,stdin);
 		printf("Your command is %s\n",command);
 		q = fork();
 		command[strlen(command)] = '\n';
+		for(int i=0;i<strlen(command)-1;i++){
+		l[i] = command[i];
+		}
 		tokens = tokenize(command);
 		if(q == 0){
 			if(execvp(tokens[0],tokens) < 0){
@@ -104,5 +109,5 @@ int main(){
 		printf("\t\t\t\t\t\tExiting shell\n");
 		}
 	}
-	fclose(fp);
+//	fclose(fp);
 }
