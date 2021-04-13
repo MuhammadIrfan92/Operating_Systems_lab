@@ -106,6 +106,7 @@ int main(){
 	if(choice == 2){	//	Interactive Mode
 		char command[150];
 		char l[150];
+		char sl[150];
 		char **tokens;
 		char **tokens2;
 		int leng;
@@ -231,12 +232,21 @@ int main(){
 		
 		else if (command[leng-2]=='&'){
 			
-					q = fork();
-		command[strlen(command)] = '\n';
-		for(int i=0;i<strlen(command)-1;i++){
-		l[i] = command[i];
+		for (int i=0; i<strlen(command);i++){
+			if(command[i] != '&'){
+				sl[i]=command[i];
+			}
 		}
-		tokens = tokenize(command);
+			
+		q = fork();
+		command[strlen(sl)] = '\n';
+		for(int i=0;i<strlen(sl)-1;i++){
+		l[i] = sl[i];
+		}
+		
+		
+		tokens = tokenize(sl);
+		
 
 		
 		if(q == 0){
