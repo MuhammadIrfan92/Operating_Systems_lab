@@ -90,18 +90,20 @@ int main(){
 		char command[150];
 		char l[150];
 		char **tokens;
+        char *tokens2;
+        char c[]="&&";
 		printf("Enter your command:");
 		scanf("%d",&none);
 		fgets(command,150,stdin);
 		printf("Your command is %s\n",command);
 		q = fork();
+        
+        char tokeen;
 		command[strlen(command)] = '\n';
-		for(int i=0;i<strlen(command)-1;i++){
-		l[i] = command[i];
-		}
 		tokens = tokenize(command);
-		if(q == 0){
-	  	       if(strcmp(tokens[0],"cd")==0){
+            
+    
+        if(strcmp(tokens[0],"cd")==0){
 	  	       printf("waaah");
 	  	       if(tokens[1]!=NULL &&tokens[1]!=".."){
 	  	       printf("aaaaaa");
@@ -117,8 +119,11 @@ int main(){
 	  	       
 	  	       }
 	  	 
+        
+		else if(q == 0){
+	  	       
 		
-			else if(execvp(tokens[0],tokens) < 0){
+			if(execvp(tokens[0],tokens) < 0){
 				printf("\nCould not execute command\n\n");
 				};
 			}
