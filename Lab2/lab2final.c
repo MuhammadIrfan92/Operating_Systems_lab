@@ -90,7 +90,7 @@ int main(){
 		char command[150];
 		char l[150];
 		char **tokens;
-        char *tokens2;
+        
         char c[]="&&";
 		printf("Enter your command:");
 		scanf("%d",&none);
@@ -98,7 +98,7 @@ int main(){
 		printf("Your command is %s\n",command);
 		q = fork();
         
-        char tokeen;
+        
 		command[strlen(command)] = '\n';
 		tokens = tokenize(command);
             
