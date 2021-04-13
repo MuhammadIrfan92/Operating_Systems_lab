@@ -6,6 +6,8 @@
 #include<fcntl.h>
 #include<sys/wait.h>
 #include<sys/stat.h>
+//#include<readline/readline.h>
+//#include<readline/history.h>
 
 #define MAX_INPUT_SIZE 1024
 #define MAX_TOKEN_SIZE 64
@@ -41,7 +43,21 @@ void printDir()
     getcwd(cwd, sizeof(cwd));
     printf("\nDir: %s", cwd);
 }
+/*
+int takeInput(char* str)
+{
+	char* buf;
 
+	buf = readline("\n>>> ");
+	if (strlen(buf) != 0) {
+		add_history(buf);
+		strcpy(str, buf);
+		return 0;
+	} else {
+		return 1;
+	}
+}
+*/
 
 int main(){
 
@@ -96,12 +112,14 @@ int main(){
 		printf("Enter your command:");
 		scanf("%d",&none);
 		fgets(command,150,stdin);
+		//add_history(command);
+		//takeInput(command);
 		printf("Your command is %s\n",command);
 		
 		leng=strlen(command);
 		printf("\n");
 		
-		printf("%d,%c \n",leng,command[leng-2]);
+		
 		
 		char *check=" && ";
 		//*********************************************************************
@@ -110,7 +128,7 @@ int main(){
 			
 			char n_command[150],nn_command[150];
 			int brek;
-			printf("\n&& is in the string\n");
+			
 			for (int i=0;i<strlen(command);i++){
 				if(command[i] != '&'){
 					n_command[i]=command[i];
@@ -126,12 +144,9 @@ int main(){
 				nn_command[k]=n_command[j];
 				k++;
 			}
-			printf("s,n_command is %s\n",command);
-			printf("ss,n_command is %s\n",n_command);
-			printf("sss,nn_command is %s\n",nn_command);
-			ex = getpid();
-			printf("%d",ex);
-			
+			//printf("s,n_command is %s\n",command);
+			//printf("ss,n_command is %s\n",n_command);
+			//printf("sss,nn_command is %s\n",nn_command);
 			// s-> command, ss-> n_command, sss->nn_command
 
 			
@@ -147,9 +162,9 @@ int main(){
 			
 			if(q == 0){
 				   if(strcmp(tokens[0],"cd")==0){
-				   printf("waaah");
+				  // printf("waaah");
 				   if(tokens[1]!=NULL &&tokens[1]!=".."){
-				   printf("aaaaaa");
+				  // printf("aaaaaa");
 				   chdir(tokens[1]);
 				   }
 				   else if(tokens[1]==NULL){
@@ -184,9 +199,9 @@ int main(){
 			
 			if(q == 0){
 				   if(strcmp(tokens[0],"cd")==0){
-				   printf("waaah");
+				   //printf("waaah");
 				   if(tokens[1]!=NULL &&tokens[1]!=".."){
-				   printf("aaaaaa");
+				   //printf("aaaaaa");
 				   chdir(tokens[1]);
 				   }
 				   else if(tokens[1]==NULL){
@@ -215,25 +230,20 @@ int main(){
 		//********************************************************************
 		
 		else if (command[leng-2]=='&'){
-			printf("aho\n");
+			
 					q = fork();
 		command[strlen(command)] = '\n';
 		for(int i=0;i<strlen(command)-1;i++){
 		l[i] = command[i];
 		}
 		tokens = tokenize(command);
-		//printf("length of tokens is %ld,%ld\n",sizeof(tokens),sizeof(tokens[0]));
-		
-		//printf("length of tokens is %zu\n",(sizeof(tokens)/sizeof(tokens[0])));
-		//printf("%zu\n",sizeof(tokens));
-		//printf("%s",tokens);
-		
+
 		
 		if(q == 0){
 	  	       if(strcmp(tokens[0],"cd")==0){
-	  	       printf("waaah");
+	  	      // printf("waaah");
 	  	       if(tokens[1]!=NULL &&tokens[1]!=".."){
-	  	       printf("aaaaaa");
+	  	       //printf("aaaaaa");
 	  	       chdir(tokens[1]);
 	  	       }
 	  	       else if(tokens[1]==NULL){
@@ -256,7 +266,7 @@ int main(){
 			//}
 		}
 		else{
-			printf("naho\n ");
+			
 					q = fork();
 		command[strlen(command)] = '\n';
 		for(int i=0;i<strlen(command)-1;i++){
@@ -272,9 +282,9 @@ int main(){
 		
 		if(q == 0){
 	  	       if(strcmp(tokens[0],"cd")==0){
-	  	       printf("waaah");
+	  	       //printf("waaah");
 	  	       if(tokens[1]!=NULL &&tokens[1]!=".."){
-	  	       printf("aaaaaa");
+	  	       //printf("aaaaaa");
 	  	       chdir(tokens[1]);
 	  	       }
 	  	       else if(tokens[1]==NULL){
@@ -300,7 +310,8 @@ int main(){
 	if(choice == 3){
 		ex = getpid();
 		kill(ex,SIGKILL);
-		printf("pid:%d\n",ex);
+		
+		//printf("pid:%d\n",ex);
 		}
 	}
 //	fclose(fp);
