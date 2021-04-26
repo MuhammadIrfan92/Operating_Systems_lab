@@ -45,7 +45,9 @@ int main(int argc, char *argv[]){
 		pthread_join(tid[i],NULL);
 		
 	}
-	pthread_mutex_destroy(&mutex);
+	if(pthread_mutex_destroy(&mutex) != 0){
+		printf("Mutex could not be destroyed\n");
+	}
 	counter = counter / THREADS;
 	
 	pie = (float)(4 * counter)/points;
