@@ -17,22 +17,12 @@ int main(int argc, char *argv[]){
 	/*setting the default attributes of the thread*/
 	pthread_attr_init(&attr);
 	/*creating the thread*/
-	if(pthread_create(&tid,&attr,monte_carlo,argv[1]) != 0){
-		printf("Thread was not created\n");
-	}
+	pthread_create(&tid,&attr,monte_carlo,argv[1]);
 	/*waitng for the thread to exit*/
 	pthread_join(tid,NULL);
-	
-	
-	
-	
 	pie = (float)(4 * counter)/points;
-	
 	//printf("total pionts in or onto the cirle are:%d\n",counter);
 	printf("pie is:%f\n",pie);
-	
-	
-	
 	return 0;
 }
 
@@ -54,7 +44,6 @@ void *monte_carlo(void *param){
 		/*if the distance is 1 or less than 1 that means the point lies on or inside circle*/
 		if(distance <=1){
 			counter++;
-		
 		}
 	}
 	
