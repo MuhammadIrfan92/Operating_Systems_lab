@@ -12,6 +12,7 @@ int main(){
 	int burst2[num];
 	for(i=0;i<num;i++){
 		burst2[i] = burst[i];
+		
 	}
 
 	printf("\t\t------------------------------------------\n");
