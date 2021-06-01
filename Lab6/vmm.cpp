@@ -19,6 +19,12 @@ struct tlb_struct {
 };
 
 
+float percentage(int a){
+	float per;
+	per = ((double) a/1000) * 100;
+	return per;
+}
+
 int main (int argc, char *argv[]){
 	int i;
 	
@@ -134,16 +140,18 @@ int main (int argc, char *argv[]){
 		}
 		
 		value = physical_memory[physical_address];
-		printf("logical address:%4d\t",logicalAddress);
+		printf("Virtual address:%4d\t",logicalAddress);
 		printf("Physical address: %4d\t", physical_address);
 		printf("Value: %4d\n",value);
 		
 	}
 	
-	page_fault_rate = (double) page_fault_count / 1000*100;
+	
+	page_fault_rate = percentage(page_fault_count);
 	printf("page fault rate: %.2f%%\n",page_fault_rate);
 	
-	tlb_hit_rate = ((double) tlb_hit_count / 1000)* 100;
+	
+	tlb_hit_rate = percentage(tlb_hit_count);
 	printf("tlb hit rate: %.2f%%\n",tlb_hit_rate);
 	
 	fclose(addressFile); 
