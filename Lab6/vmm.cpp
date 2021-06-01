@@ -49,27 +49,19 @@ int main (int argc, char *argv[]){
 	
 	char buffer[PAGE_SIZE];
 	
-	int logicalAddress = 0;
-	int page_number = 0;
-	int offset = 0;
+	int logicalAddress = 0,page_number = 0,offset = 0;
+	int physical_address =0,frame =0,value =0;
 	
-	int physical_address =0;
-	int frame =0;
-	int value =0;
+	int tlb_hit =0,tlbIndex=0,tlb_buffer =0;
 	
-	int tlb_hit =0;
-	int tlbIndex=0;
-	int tlb_buffer =0;
-	
-	int page_fault_count =0;
-	double page_fault_rate =0;
-	int tlb_hit_count =0;
-	double tlb_hit_rate=0;
+	int page_fault_count =0,tlb_hit_count =0;
+	double page_fault_rate =0,tlb_hit_rate=0;
+
 	
 	FILE *addressFile;
 	addressFile = fopen(argv[1],"r");
 	if ( addressFile == NULL){
-		printf("address.txt is not available!\n");
+		printf("the file passed address.txt is not available\n");
 		return 0;
 	}
 	
@@ -79,7 +71,7 @@ int main (int argc, char *argv[]){
 	backing_store = fopen("BACKING_STORE.bin","rb");
 	
 	if (backing_store == NULL){
-		printf("BACKING_STOREE.bin is not available\n");
+		printf("the file passed BACKING_STORE.bin is not available\n");
 		return 0;
 	}
 	
@@ -90,7 +82,7 @@ int main (int argc, char *argv[]){
 		page_number = (logicalAddress & 0xFF00) >> 8;
 		offset = logicalAddress & 0x00FF;
 		tlb_hit = -1;
-		//check the tlb to find a match for given page number
+		//checking if given page number is present in tlb 
 		for ( i =0;i<tlb_buffer;i++){
 			if(tlb[i].page == page_number){
 				tlb_hit = tlb[i].frame;
@@ -113,7 +105,7 @@ int main (int argc, char *argv[]){
 			}
 			page_fault_count++;
 			frame++;
-			
+			//first-int-first-out for tlb
 			if(tlb_buffer == TLB_SIZE){
 				tlb_buffer--;
 			}
