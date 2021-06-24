@@ -26,6 +26,8 @@ void simplefs_close(int file_handle){
     /*
 	    close file pointed by `file_handle`
 	*/
+	file_handle_array[file_handle].offset = 0;
+	file_handle_array[file_handle].inode_number = -1;
 
 }
 
@@ -49,5 +51,12 @@ int simplefs_seek(int file_handle, int nseek){
     /*
 	   increase `file_handle` offset by `nseek`
 	*/
-    return -1;
+	
+    if(file_handle_array[file_handle].offset + nseek < 0 || file_handle_array[file_handle].offset + nseek >= MAX_FILE_SIZE*BLOCKSIZE){
+    	return -1; // failure, in case of offset goes beyond current file boundaries
+    	}
+		
+    
+    file_handle_array[file_handle].offset += nseek;
+    return 0; // success
 }
